@@ -8,7 +8,15 @@ set -ex
 
 echo "Building E93 OS..."
 
-nasm -f bin e93ldr.asm -o e93ldr.bin
+cd e93ldr
+
+echo "Building E93LDR..."
+
+nasm -f bin e93ldr.asm -o ../e93ldr.bin
+
+echo "Finished building E93LDR!"
+
+cd ..
 
 echo "Finished building E93 OS!"
 
