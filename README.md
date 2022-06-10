@@ -5,6 +5,7 @@ Minimal operating system for E93.
 ## References
 
 - [https://github.com/cfenollosa/o-tutorial/tree/master/02-bootsector-print](https://github.com/cfenollosa/o-tutorial/tree/master/02-bootsector-print)
+- [https://www.rapidtables.com/ccode/text/ascii-table.html](https://www.rapidtables.com/ccode/text/ascii-table.html)
 
 ## Copyright and License
 

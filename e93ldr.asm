@@ -6,28 +6,18 @@
 ; Specify global offset of the boot sector
 [org 0x7c00]
 
-; Enter TTY mode
-mov ah, 0x0e
+; Print welcome message data and newline
+mov bx, E93WELCOME
+call print
 
-; Write "\nE93LDR"
-mov al, 10
-int 0x10
-mov al, 13
-int 0x10
-mov al, 'E'
-int 0x10
-mov al, '9'
-int 0x10
-mov al, '3'
-int 0x10
-mov al, 'L'
-int 0x10
-mov al, 'D'
-int 0x10
-mov al, 'R'
-int 0x10
+; Infinite loop
+jmp $
 
-jmp $  ;Infinite loop
+%include "e93ldr_print.asm"  ; E93LDR Printing Module
+
+; Welcome message data
+E93WELCOME:
+    db 'Welcome to E93 Loader!', 0
 
 ; Boot sector padding and magic number BIOS checks
 times 510-($-$$) db 0
