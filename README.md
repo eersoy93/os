@@ -6,7 +6,7 @@ Minimal operating system for E93.
 
 In [Pardus 21](https://www.pardus.org.tr/), install NASM and QEMU:
 
-`sudo apt install nasm qemu`
+`sudo apt install nasm qemu-system-x86`
 
 ## References
 
