@@ -1,3 +1,3 @@
 # os
 
-Minimal Linux-based operating system for E93.
+Minimal operating system for E93.
