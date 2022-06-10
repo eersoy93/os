@@ -3,7 +3,10 @@
 ; COPYRIGHT: Copyright (c) 2022 Erdem Ersoy (eersoy93).
 ; LICENSE: MIT license. See README.md file for deatils.
 
-; Entering TTY mode
+; Specify global offset of the boot sector
+[org 0x7c00]
+
+; Enter TTY mode
 mov ah, 0x0e
 
 ; Write "\nE93LDR"
