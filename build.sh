@@ -11,10 +11,17 @@ echo "Building E93 OS..."
 cd e93ldr
 
 echo "Building E93LDR..."
-
 nasm -f bin e93ldr.asm -o ../e93ldr.bin
-
 echo "Finished building E93LDR!"
+
+cd ..
+
+cd kernel
+
+echo "Building E93 Kernel..."
+i686-linux-gnu-gcc -ffreestanding -fno-pie -c kernel.c -o kernel.o
+i686-linux-gnu-ld -o kernel.bin -Ttext 0x0 --oformat binary kernel.o
+echo "Finished building E93 Kernel!"
 
 cd ..
 
