@@ -6,6 +6,7 @@
 print:
     pusha
 
+print_loop:
     mov al, [bx]
     cmp al, 0
     je print_done
@@ -15,7 +16,7 @@ print:
     int 0x10
 
     add bx, 1
-    jmp print
+    jmp print_loop
 
     ; Print newline characters (LF + CR)
     mov al, 0x0a
