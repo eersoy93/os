@@ -18,12 +18,12 @@ print_loop:
     add bx, 1
     jmp print_loop
 
+print_done:
     ; Print newline characters (LF + CR)
     mov al, 0x0a
     int 0x10
     mov al, 0x0d
     int 0x10
 
-print_done:
     popa
     ret

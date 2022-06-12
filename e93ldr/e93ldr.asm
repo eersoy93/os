@@ -9,6 +9,9 @@
 mov bp, 0x9000
 mov sp, bp
 
+mov bx, MSG_WELCOME
+call print
+
 mov bx, MSG_ENTER_REALMODE
 call print
 
@@ -28,6 +31,7 @@ begin_protected_mode:
     jmp $  ; infinite loop
 
 ; Messages data
+MSG_WELCOME db "Welcome to E93 Loader!", 0
 MSG_ENTER_REALMODE db "Started in 16-bit real mode!", 0
 MSG_ENTER_PROTECTEDMODE db "Started in 32-bit protected mode!", 0
 
