@@ -22,12 +22,12 @@ call load_kernel
 call switch_to_protected_mode
 jmp $
 
-%include "e93ldr_print.asm"  ; E93LDR Printing Module
-%include "e93ldr_print_hex.asm"  ; E93LDR Printing Hex Values Module
-%include "e93ldr_disk.asm"  ; E93LDR Disk Module
-%include "e93ldr_gdt.asm"  ; E93LDR Global Descriptor Table Module
-%include "e93ldr_switch_to_protected_mode.asm"  ; E93LDR Switch to Protected Mode Module
-%include "e93ldr_print_protected_mode.asm"  ; E93LDR Printing Module (for Protected Mode)
+%include "loader/loader_print.asm"  ; E93 OS Loader Printing Module
+%include "loader/loader_print_hex.asm"  ; E93 OS Loader Printing Hex Values Module
+%include "loader/loader_disk.asm"  ; E93 OS Loader Disk Module
+%include "loader/loader_gdt.asm"  ; E93 OS Loader Global Descriptor Table Module
+%include "loader/loader_switch_to_protected_mode.asm"  ; E93 OS Loader Switch to Protected Mode Module
+%include "loader/loader_print_protected_mode.asm"  ; E93 OS Loader Printing Module (for Protected Mode)
 
 [bits 16]
 
