@@ -2,11 +2,27 @@
 
 Minimal operating system for E93.
 
-## Building
+## Building and Running
 
 In [Pardus 21](https://www.pardus.org.tr/), install NASM and QEMU:
 
 `sudo apt install nasm qemu-system-x86`
+
+After that, move to the src directory:
+
+`cd src`
+
+After that, build the OS:
+
+`make build`
+
+After building, you can run:
+
+`make run`
+
+Instead of `make build` and `make run`, you can do this:
+
+`make all`
 
 ## References
 
