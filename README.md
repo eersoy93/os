@@ -27,6 +27,8 @@ Instead of `make build` and `make run`, you can do this:
 ## References
 
 - [https://github.com/cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial)
+- [https://www.fountainware.com/EXPL/vga_color_palettes.htm](https://www.fountainware.com/EXPL/vga_color_palettes.htm)
+- [https://en.wikipedia.org/wiki/VGA_text_mode](https://en.wikipedia.org/wiki/VGA_text_mode)
 - [https://www.rapidtables.com/code/text/ascii-table.html](https://www.rapidtables.com/code/text/ascii-table.html)
 
 ## Copyright and License
