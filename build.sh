@@ -20,10 +20,15 @@ cd kernel
 
 echo "Building E93 Kernel..."
 i686-linux-gnu-gcc -ffreestanding -fno-pie -c kernel.c -o kernel.o
-i686-linux-gnu-ld -o kernel.bin -Ttext 0x0 --oformat binary kernel.o
+nasm kernel_entry.asm -f elf -o kernel_entry.o
+i686-linux-gnu-ld -o ../kernel.bin -Ttext 0x1000 kernel_entry.o kernel.o --oformat binary
 echo "Finished building E93 Kernel!"
 
 cd ..
+
+echo "Building the E93 OS image..."
+
+cat e93ldr.bin kernel.bin > e93os.bin
 
 echo "Finished building E93 OS!"
 

@@ -1,4 +1,7 @@
-int my_kernel_function(void) {
-    int s = 23;
-    return s;
+void dummy() {
+}
+
+void main() {
+    char * video_memory = (char *) 0xb8000;
+    *video_memory = 'X';
 }
