@@ -14,15 +14,11 @@ After that, move to the src directory:
 
 After that, build the OS:
 
-`make build`
+`make`
 
 After building, you can run:
 
 `make run`
-
-Instead of `make build` and `make run`, you can do this:
-
-`make all`
 
 ## References
 
