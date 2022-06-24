@@ -1,4 +1,4 @@
-/* DESCRIPTION: E93 OS Port Drivers Source File
+/* DESCRIPTION: E93 OS Port Driver Source File
  * AUTHOR: Erdem Ersoy (eersoy93)
  * COPYRIGHT: Copyright (c) 2022 Erdem Ersoy (eersoy93).
  * LICENSE: MIT license. See README.md file for deatils.
