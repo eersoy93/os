@@ -22,6 +22,7 @@ After building, you can run:
 
 ## TODO
 
+- Finish reading [os-tutorial](https://github.com/cfenollosa/os-tutorial).
 - Read Tanenbaum's Modern Operating Systems (Perason International 3rd edition). (eersoy93)
 
 ## References
