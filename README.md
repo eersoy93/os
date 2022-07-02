@@ -22,7 +22,7 @@ After building, you can run:
 
 ## TODO
 
-- Read Tanenbaum's Modern Operating Systems (3rd edition)
+- Read Tanenbaum's Modern Operating Systems (Perason International 3rd edition) (eersoy93).
 
 ## References
 
