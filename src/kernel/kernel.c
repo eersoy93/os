@@ -8,6 +8,6 @@
 
 void main() {
     clear_screen();
-    kprint("Executing the kernel...\n");
-    kprint("Welcome to E93 OS!\n");
+    printk("Executing the kernel...\n");
+    printk("Welcome to E93 OS!\n");
 }

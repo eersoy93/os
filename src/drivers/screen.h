@@ -24,7 +24,7 @@
 // Public Kernel API Declarations
 
 void clear_screen();
-void kprint(char * message);
-void kprint_at(char * message, int col, int row);
+void printk(char * message);
+void printk_at(char * message, int col, int row);
 
 #endif

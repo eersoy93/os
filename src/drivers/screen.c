@@ -14,7 +14,7 @@ int get_cursor_offset();
 int get_offset(int col, int row);
 int get_offset_col(int offset);
 int get_offset_row(int offset);
-int kprint_char(char character, int col, int row, char attribute);
+int printk_char(char character, int col, int row, char attribute);
 void set_cursor_offset(int offset);
 
 
@@ -35,12 +35,12 @@ void clear_screen() {
 }
 
 // Print message at cursor location
-void kprint(char * message) {
-    kprint_at(message, -1, -1);
+void printk(char * message) {
+    printk_at(message, -1, -1);
 }
 
 // Print message at specific location
-void kprint_at(char * message, int col, int row) {
+void printk_at(char * message, int col, int row) {
     int offset = 0;
 
     if (col >= 0 && row >= 0) {
@@ -55,7 +55,7 @@ void kprint_at(char * message, int col, int row) {
     int i = 0;
 
     while (message[i] != 0) {
-        offset = kprint_char(message[i++], col, row, WHITE_ON_BLACK);
+        offset = printk_char(message[i++], col, row, WHITE_ON_BLACK);
         row = get_offset_row(offset);
         col = get_offset_col(offset);
     }
@@ -90,7 +90,7 @@ int get_offset_row(int offset) {
 }
 
 // Print specific character with specific attribute at specific loaction
-int kprint_char(char character, int col, int row, char attribute) {
+int printk_char(char character, int col, int row, char attribute) {
     unsigned char * video_memory = (unsigned char *) VIDEO_ADDRESS;
     if (!attribute) {
         attribute = WHITE_ON_BLACK;
