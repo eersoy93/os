@@ -20,6 +20,10 @@ After building, you can run:
 
 `make run`
 
+## TODO
+
+- Read Tanenbaum's Modern Operating Systems (3rd edition)
+
 ## References
 
 - [https://github.com/cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial)
