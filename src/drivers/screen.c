@@ -6,6 +6,7 @@
 
 #include "ports.h"
 #include "screen.h"
+#include "../kernel/utils.h"
 
 
 // Private Kernel API Declarations
@@ -119,8 +120,24 @@ int printk_char(char character, int col, int row, char attribute) {
         video_memory[offset + 1] = attribute;
         offset += 2;
     }
-    set_cursor_offset(offset);
 
+    if (offset >= ROWS_MAX * COLS_MAX * 2) {
+        int i = 0;
+        for (i = 1; i < ROWS_MAX; i++) {
+            memory_copy(get_offset(0, i) + VIDEO_ADDRESS,
+                        get_offset(0, i - 1) + VIDEO_ADDRESS,
+                        COLS_MAX * 2);
+        }
+
+    char * lastline = get_offset(0, ROWS_MAX - 1) + VIDEO_ADDRESS;
+    for (i = 0; i < COLS_MAX * 2; i++) {
+        lastline[i] = 0;
+    }
+
+    offset -= COLS_MAX * 2;
+    }
+
+    set_cursor_offset(offset);
     return offset;
 }
 
