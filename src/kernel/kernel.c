@@ -10,6 +10,7 @@
 void main() {
     clear_screen();
 
+    // Test for video scrolling
     int i = 0;
     for(i = 0; i < 24; i++) {
         char str[255];

@@ -21,6 +21,8 @@ void int_to_ascii(int n, char str[]) {
     }
 
     str[i] = '\0';
+
+    // TODO: Implement reversing a string!!!
 }
 
 void memory_copy(char * source, char * destination, int n_bytes) {
