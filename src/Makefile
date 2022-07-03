@@ -3,9 +3,9 @@
 # COPYRIGHT: Copyright (c) 2022 Erdem Ersoy (eersoy93).
 # LICENSE: MIT license. See README.md file for deatils.
 
-ASM_SOURCES = $(wildcard loader/*.asm)
-C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
-C_HEADERS = $(wildcard kernel/*.h drivers/*.h)
+ASM_SOURCES = $(wildcard loader/*.asm cpu/*.asm)
+C_SOURCES = $(wildcard kernel/*.c drivers/*.c cpu/*.c)
+C_HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h)
 
 OBJ = ${C_SOURCES:.c=.o}
 
@@ -31,4 +31,4 @@ run: e93-os.bin
 	nasm $< -f bin -o $@
 
 clean:
-	rm -f *.bin *.o boot/*.bin kernel/*.o loader/*.o drivers/*.o
+	rm -f *.bin *.o boot/*.bin kernel/*.o loader/*.o drivers/*.o cpu/*.o

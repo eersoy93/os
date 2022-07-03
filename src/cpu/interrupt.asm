@@ -171,7 +171,7 @@ isr15:
     push byte 15
     jmp isr_common_stub
 
-; x87 Floating Point Exception
+; x87 Floating Point Fault Exception
 isr16:
     cli
     push byte 0

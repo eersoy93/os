@@ -53,6 +53,6 @@ typedef struct {
 
 // ISR Functions
 void isr_install();
-void isr_handler(registers_struct_type registers_struct);
+void isr_handler(registers_struct_type registers);
 
 #endif
