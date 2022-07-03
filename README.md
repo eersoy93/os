@@ -28,9 +28,12 @@ After building, you can run:
 ## References
 
 - [https://github.com/cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial)
+- [https://en.wikipedia.org/](https://en.wikipedia.org/)
+- [https://www.felixcloutier.com/x86/index.html](https://www.felixcloutier.com/x86/index.html)
 - [https://www.fountainware.com/EXPL/vga_color_palettes.htm](https://www.fountainware.com/EXPL/vga_color_palettes.htm)
 - [https://en.wikipedia.org/wiki/VGA_text_mode](https://en.wikipedia.org/wiki/VGA_text_mode)
 - [https://www.rapidtables.com/code/text/ascii-table.html](https://www.rapidtables.com/code/text/ascii-table.html)
+- [Pardus 21's Calculator :)](https://apps.pardus.org.tr/app/gnome-calculator)
 
 ## Copyright and License
 
