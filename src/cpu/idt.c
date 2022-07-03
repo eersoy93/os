@@ -7,7 +7,7 @@
 #include "idt.h"
 #include "../kernel/utils.h"
 
-void_set_idt_gate(int n, u32 handler) {
+void set_idt_gate(int n, u32 handler) {
     idt[n].offset_handler_function_address_low = low16(handler);
     idt[n].kernel_segment_selector = KERNEL_CS;
     idt[n].always_zero = (u8) 0;
@@ -15,7 +15,7 @@ void_set_idt_gate(int n, u32 handler) {
     idt[n].offset_handler_function_address_high = high16(handler);
 }
 
-void_set_idt() {
+void set_idt() {
     idt_register.base = (u32) &idt;
     idt_register.limit = sizeof(idt_gate_type) * IDT_ENTRIES_COUNT - 1;
     __asm__ __volatile__("lidtl (%0)" : : "r" (&idt_register));

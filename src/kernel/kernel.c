@@ -6,20 +6,16 @@
 
 #include "../drivers/screen.h"
 #include "utils.h"
+#include "../cpu/isr.h"
+#include "../cpu/idt.h"
 
 void main() {
+    isr_install();
+
     clear_screen();
-
-    // Test for video scrolling
-    int i = 0;
-    for(i = 0; i < 24; i++) {
-        char str[255];
-        int_to_ascii(i, str);
-        printk_at(str, 0, i);
-    }
-
-    printk("\n");
     printk("Executing the kernel...\n");
     printk("Welcome to E93 OS!\n");
 
+    __asm__ __volatile__("int $2");
+    __asm__ __volatile__("int $3");
 }
