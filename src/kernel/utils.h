@@ -7,7 +7,10 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include "../cpu/types.h"
+
 void int_to_ascii(int n, char str[]);
 void memory_copy(char * source, char * destination, int n_bytes);
+void memory_set(u8 * destination, u8 value, u32 length);
 
 #endif
