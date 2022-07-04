@@ -1,6 +1,6 @@
 # os
 
-Minimal operating system for E93. (WORK IN PROGRESS!!!)
+Minimal operating system.
 
 ## Building and Running
 
