@@ -1,6 +1,6 @@
 # os
 
-Minimal operating system.
+My own monolithic operating system.
 
 ## Building and Running
 
