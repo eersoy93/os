@@ -51,40 +51,21 @@ int main(void)
         while (1) pause();
     }
 
-    // Open /dev/tty7 for drawing
-    int tty_fd = open("/dev/tty7", O_WRONLY);
+    // Open /dev/tty0 for drawing
+    int tty_fd = open("/dev/tty0", O_WRONLY);
     if (tty_fd == -1)
     {
-        perror("open /dev/tty7");
-        // Continue running, but skip drawing
-    }
-
-    // Switch to tty7 using VT_ACTIVATE and VT_WAITACTIVE
-    int vt_fd = open("/dev/tty0", O_WRONLY);
-    if (vt_fd != -1)
-    {
-        if (ioctl(vt_fd, 0x5606, 7) == -1)  // VT_ACTIVATE 7
-        {
-            perror("ioctl VT_ACTIVATE");
-        }
-        if (ioctl(vt_fd, 0x5607, 7) == -1)  // VT_WAITACTIVE 7
-        {
-            perror("ioctl VT_WAITACTIVE");
-        }
-        close(vt_fd);
-    }
-    else
-    {
         perror("open /dev/tty0");
+        // Continue running, but skip drawing
     }
 
     // Main loop
     while (1)
     {
-        // Draw a green point at (row=10, col=20) on tty7
+        // Draw a green point at (row=10, col=20) on tty0
         if (tty_fd != -1)
         {
-            dprintf(tty_fd, "\033[20;1H\033[32m\033[0m");
+            dprintf(tty_fd, "\033[2;1H\033[32m\033[0m");
             fsync(tty_fd);
         }
 

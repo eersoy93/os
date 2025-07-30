@@ -25,27 +25,6 @@ build: ${FILES_SOURCE}
 	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty0 c 4 0 2>/dev/null; then \
 		echo "Warning: Could not create /dev/tty0 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty0 c 4 0' manually if needed."; \
 	fi
-	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty1 c 4 1 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty1 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty1 c 4 1' manually if needed."; \
-	fi
-	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty2 c 4 2 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty2 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty2 c 4 2' manually if needed."; \
-	fi
-	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty3 c 4 3 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty3 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty3 c 4 3' manually if needed."; \
-	fi
-	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty4 c 4 4 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty4 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty4 c 4 4' manually if needed."; \
-	fi
-	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty5 c 4 5 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty5 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty5 c 4 5' manually if needed."; \
-	fi
-	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty6 c 4 6 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty6 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty6 c 4 6' manually if needed."; \
-	fi
-	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty7 c 4 7 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty7 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty7 c 4 7' manually if needed."; \
-	fi
 	cd ${ROOTFS_DIR} && find . | cpio -o --format=newc > ../${ROOTFS_IMAGE}
 
 run: build
