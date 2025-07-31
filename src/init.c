@@ -19,19 +19,44 @@ void handle_sigint(int sig)
 
 int main(void)
 {
-    puts("Hello, World!");
-    fflush(stdout);
+    // Redirect stdin and stdout to /dev/null
+    int null_fd = open("/dev/null", O_RDWR);
+    if (null_fd != -1)
+    {
+        dup2(null_fd, STDIN_FILENO);
+        dup2(null_fd, STDOUT_FILENO);
+        // Optionally, close null_fd if it's not stdin or stdout
+        if (null_fd > STDOUT_FILENO)
+        {
+            close(null_fd);
+        }
+    }
 
+    // Disable cursor on tty0 (if available)
+    int tty_fd_cursor = open("/dev/tty0", O_WRONLY);
+    if (tty_fd_cursor != -1)
+    {
+        dprintf(tty_fd_cursor, "\033[?25l"); // Hide cursor
+        fsync(tty_fd_cursor);
+        close(tty_fd_cursor);
+    }
+
+    // Set up signal handler for SIGINT
     signal(SIGINT, handle_sigint);
 
+    // Open framebuffer device
     int fb_fd = open("/dev/fb0", O_RDWR);
     if (fb_fd == -1)
     {
         perror("open framebuffer");
         // Never exit, just wait forever
-        while (1) pause();
+        while (1)
+        {
+            pause();
+        }
     }
 
+    // Get framebuffer information
     struct fb_var_screeninfo vinfo;
     struct fb_fix_screeninfo finfo;
     if (ioctl(fb_fd, FBIOGET_FSCREENINFO, &finfo) == -1 ||
@@ -39,16 +64,23 @@ int main(void)
     {
         perror("ioctl framebuffer");
         close(fb_fd);
-        while (1) pause();
+        while (1)
+        {
+            pause();
+        }
     }
 
+    // Get screen size and map framebuffer to memory
     long screen_size = vinfo.yres_virtual * finfo.line_length;
     uint8_t *fbp = (uint8_t *)mmap(0, screen_size, PROT_READ | PROT_WRITE, MAP_SHARED, fb_fd, 0);
     if ((intptr_t)fbp == -1)
     {
         perror("mmap framebuffer");
         close(fb_fd);
-        while (1) pause();
+        while (1)
+        {
+            pause();
+        }
     }
 
     // Open /dev/tty0 for drawing
@@ -91,8 +123,13 @@ int main(void)
         sleep(1);
     }
 
-    if (tty_fd != -1) close(tty_fd);
+    // Cleanup
+    if (tty_fd != -1)
+    {
+        close(tty_fd);
+    }
     munmap(fbp, screen_size);
     close(fb_fd);
+
     return EXIT_SUCCESS;
 }

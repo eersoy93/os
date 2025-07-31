@@ -19,16 +19,20 @@ build: ${FILES_SOURCE}
 	cp ${SYSTEM_LIBS64} ${ROOTFS_LIB64_DIR}/
 	# Create framebuffer device node (major 29, minor 0)
 	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/fb0 c 29 0 2>/dev/null; then \
-		echo "Warning: Could not create /dev/fb0 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/fb0 c 29 0' manually if needed."; \
+		echo "Warning: Could not create /dev/fb0 (need sudo)! Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/fb0 c 29 0' manually if needed."; \
 	fi
-	# Create tty devices (major 4, minors 0,1,2,3,4,5,6,7)
+	# Create tty device (major 4, minors 0)
 	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty0 c 4 0 2>/dev/null; then \
-		echo "Warning: Could not create /dev/tty0 (need sudo). Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty0 c 4 0' manually if needed."; \
+		echo "Warning: Could not create /dev/tty0 (need sudo)! Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/tty0 c 4 0' manually if needed."; \
+	fi
+	# Create null device (major 1, minor 3)
+	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/null c 1 3 2>/dev/null; then \
+		echo "Warning: Could not create /dev/null (need sudo)! Run 'sudo mknod -m 666 ${ROOTFS_DIR}/dev/null c 1 3' manually if needed."; \
 	fi
 	cd ${ROOTFS_DIR} && find . | cpio -o --format=newc > ../${ROOTFS_IMAGE}
 
 run: build
-	sudo qemu-system-x86_64 -kernel ${SYSTEM_KERNEL} -initrd ${ROOTFS_IMAGE} -append "root=/dev/ram rdinit=/bin/init vga=789 quiet loglevel=1" -m 512 -vga std
+	sudo qemu-system-x86_64 -kernel ${SYSTEM_KERNEL} -initrd ${ROOTFS_IMAGE} -append "root=/dev/ram rdinit=/bin/init vga=789 quiet" -m 512 -vga std
 
 clean:
 	rm -rf ${ROOTFS_DIR} ${TARGET_INIT} ${ROOTFS_IMAGE}
