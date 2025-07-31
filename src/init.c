@@ -1,4 +1,4 @@
-#include "init.h"
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -6,6 +6,8 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
+
+#include "init.h"
 
 static void handle_sigint(int sig)
 {

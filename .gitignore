@@ -57,4 +57,5 @@ dkms.conf
 # Project-specific files
 rootfs/
 rootfs.cpio
-
+.vscode/
+.vscode-test/

@@ -1,5 +1,7 @@
-#include "init.h"
+#define _GNU_SOURCE
+#include <stdio.h>
 #include <unistd.h>
+#include "init.h"
 
 int main(void)
 {
@@ -36,7 +38,4 @@ int main(void)
 
         sleep(1);
     }
-
-    // Cleanup (unreachable)
-    return 0;
 }
