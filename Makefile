@@ -1,5 +1,6 @@
 ROOTFS_DIR = rootfs
 ROOTFS_BIN_DIR = ${ROOTFS_DIR}/bin
+ROOTFS_DEV_DIR = ${ROOTFS_DIR}/dev
 ROOTFS_IMAGE = rootfs.cpio
 
 FILES_SOURCE = $(wildcard src/*.c)
@@ -18,7 +19,7 @@ src/%.o: src/%.c
 	${CC} ${CFLAGS} -c $< -o $@
 
 build: ${FILES_OBJECTS}
-	mkdir -p ${ROOTFS_DIR}/bin ${ROOTFS_DIR}/lib ${ROOTFS_DIR}/lib64 ${ROOTFS_DIR}/dev
+	mkdir -p ${ROOTFS_BIN_DIR} ${ROOTFS_DEV_DIR}
 	${CC} ${CFLAGS} -o ${TARGET_INIT} ${FILES_OBJECTS} ${LDFLAGS}
 	chmod +x ${TARGET_INIT}
 	# Create framebuffer device node (major 29, minor 0)
