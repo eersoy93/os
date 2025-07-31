@@ -5,6 +5,7 @@ ROOTFS_LIB64_DIR = ${ROOTFS_DIR}/lib64
 ROOTFS_IMAGE = rootfs.cpio
 
 FILES_SOURCE = $(wildcard src/*.c)
+FILES_OBJECTS = $(FILES_SOURCE:.c=.o)
 TARGET_INIT = ${ROOTFS_BIN_DIR}/init
 
 SYSTEM_LIBS = /lib/x86_64-linux-gnu/libc.so.6
@@ -13,7 +14,7 @@ SYSTEM_KERNEL = /boot/vmlinuz-$(shell uname -r)
 
 build: ${FILES_SOURCE}
 	mkdir -p ${ROOTFS_DIR}/bin ${ROOTFS_DIR}/lib ${ROOTFS_DIR}/lib64 ${ROOTFS_DIR}/dev
-	gcc -o ${TARGET_INIT} ${FILES_SOURCE}
+	gcc -o ${TARGET_INIT} src/init.c src/main.c
 	chmod +x ${TARGET_INIT}
 	cp ${SYSTEM_LIBS} ${ROOTFS_LIB_DIR}/
 	cp ${SYSTEM_LIBS64} ${ROOTFS_LIB64_DIR}/
