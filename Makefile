@@ -3,7 +3,7 @@ ROOTFS_BIN_DIR = ${ROOTFS_DIR}/bin
 ROOTFS_DEV_DIR = ${ROOTFS_DIR}/dev
 ROOTFS_IMAGE = rootfs.cpio
 
-FILES_SOURCE = $(wildcard src/*.c)
+FILES_SOURCE = $(wildcard init/*.c)
 FILES_OBJECTS = $(FILES_SOURCE:.c=.o)
 TARGET_INIT = ${ROOTFS_BIN_DIR}/init
 
