@@ -4,6 +4,8 @@ Erdem Ersoy's New OS. Uses Pardus 23's Linux kernel. Written with GitHub Copilot
 
 **NOTE:** This project is a stub.
 
+![Erdem Ersoy's New OS Screenshot](os.png)
+
 ## Required Pardus 23 Packages
 
 ``` 
