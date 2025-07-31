@@ -10,7 +10,7 @@ TARGET_INIT = ${ROOTFS_BIN_DIR}/init
 SYSTEM_KERNEL = /boot/vmlinuz-$(shell uname -r)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c17
+CFLAGS = -Wall -Wextra -Werror -std=c17 -D_GNU_SOURCE
 LDFLAGS = -static
 
 

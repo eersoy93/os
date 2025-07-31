@@ -1,4 +1,3 @@
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -74,6 +73,12 @@ struct system_state init_system(void)
     if (state.tty_fd == -1)
     {
         perror("open /dev/tty0");
+    }
+    else
+    {
+        // Draw a green point at (row=10, col=20) on tty0 automatically at init
+        dprintf(state.tty_fd, "\033[10;20H\033[32m\033[0m");
+        fsync(state.tty_fd);
     }
 
     return state;
