@@ -9,7 +9,7 @@ Erdem Ersoy's New OS. Uses Pardus 23's Linux kernel. Written with GitHub Copilot
 ## Required Pardus 23 Packages
 
 ``` 
-build-essential
+build-essential qemu-system-x86
 ```
 
 ## Building and Running
