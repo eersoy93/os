@@ -3,10 +3,15 @@ ROOTFS_BIN_DIR = ${ROOTFS_DIR}/bin
 ROOTFS_DEV_DIR = ${ROOTFS_DIR}/dev
 ROOTFS_IMAGE = rootfs.cpio
 
-FILES_SOURCE = $(wildcard init/*.c)
-FILES_OBJECTS = $(FILES_SOURCE:.c=.o)
+FILES_INIT_SOURCE = init/init.c init/main.c init/gfx.c
+FILES_INIT_OBJECTS = $(FILES_INIT_SOURCE:.c=.o)
 TARGET_INIT = ${ROOTFS_BIN_DIR}/init
 
+FILES_POWEROFF_SOURCE = init/poweroff.c
+FILES_POWEROFF_OBJECTS = $(FILES_POWEROFF_SOURCE:.c=.o)
+TARGET_POWEROFF = ${ROOTFS_BIN_DIR}/poweroff
+
+FILES_OBJECTS = ${FILES_INIT_OBJECTS} ${FILES_POWEROFF_OBJECTS}
 SYSTEM_KERNEL = /boot/vmlinuz-$(shell uname -r)
 
 CC = gcc
@@ -19,8 +24,11 @@ src/%.o: src/%.c
 	${CC} ${CFLAGS} -c $< -o $@
 
 build: ${FILES_OBJECTS}
+	# Create the root filesystem directory structure
 	mkdir -p ${ROOTFS_BIN_DIR} ${ROOTFS_DEV_DIR}
-	${CC} ${CFLAGS} -o ${TARGET_INIT} ${FILES_OBJECTS} ${LDFLAGS}
+	${CC} ${CFLAGS} -o ${TARGET_INIT} ${FILES_INIT_OBJECTS} ${LDFLAGS}
+	${CC} ${CFLAGS} -o ${TARGET_POWEROFF} ${FILES_POWEROFF_OBJECTS} ${LDFLAGS}
+	# Ensure the init binary is executable
 	chmod +x ${TARGET_INIT}
 	# Create framebuffer device node (major 29, minor 0)
 	@if ! sudo mknod -m 666 ${ROOTFS_DIR}/dev/fb0 c 29 0 2>/dev/null; then \

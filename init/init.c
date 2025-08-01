@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
+#include <termios.h>
 
 #include "init.h"
 
@@ -18,16 +19,6 @@ static void handle_sigint(int sig)
 struct system_state init_system(void)
 {
     struct system_state state = {0};
-
-    // Redirect stdin and stdout to /dev/null
-    int null_fd = open("/dev/null", O_RDWR);
-    if (null_fd != -1)
-    {
-        dup2(null_fd, STDIN_FILENO);
-        dup2(null_fd, STDOUT_FILENO);
-        if (null_fd > STDOUT_FILENO)
-            close(null_fd);
-    }
 
     // Disable cursor on tty0 (if available)
     int tty_fd_cursor = open("/dev/tty0", O_WRONLY);
@@ -81,5 +72,33 @@ struct system_state init_system(void)
         fsync(state.tty_fd);
     }
 
+    // Set the framebuffer file descriptor in the system state
+    state.fb_fd = fb_fd;
+
     return state;
+}
+
+int read_key(void)
+{
+    struct termios oldt, newt;
+    int ch;
+
+    // Set terminal to non-canonical mode to read single characters
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+    // Set stdin to non-blocking mode to avoid blocking on getchar
+    fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    fcntl(STDIN_FILENO, F_SETFL, 0);
+
+    // If no character was read, return -1
+    if (ch == EOF)
+    {
+        return -1;
+    }
+    return ch;
 }

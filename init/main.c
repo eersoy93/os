@@ -1,15 +1,33 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
 #include <unistd.h>
+#include <sys/mman.h>
 #include "init.h"
 #include "gfx.h"
+#include <termios.h>
 
 int main(void)
 {
     struct system_state state = init_system();
-    
+
+    // Disable terminal echo
+    struct termios oldt, newt;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
     // Main loop
     while (1)
     {
+        int key = read_key();
+        // Exit on 'ESC' key
+        if (key == 27) // ASCII code for ESC
+        {
+            break;
+        }
+
         // Example: draw a pixel at (10, 10) with color 0x00FF00 (green)
         putpixel(state.fbp, &state.vinfo, &state.finfo, 10, 10, 0x00, 0xFF, 0x00);
 
@@ -31,4 +49,26 @@ int main(void)
         // Sleep for a while to avoid busy waiting
         sleep(1);
     }
+
+    // Clean up resources
+    if (state.tty_fd != -1)
+    {
+        dprintf(state.tty_fd, "\033[?25h"); // Show cursor
+        fsync(state.tty_fd);
+        close(state.tty_fd);
+    }
+    if (state.fbp != MAP_FAILED)
+    {
+        munmap(state.fbp, state.vinfo.yres_virtual * state.finfo.line_length);
+    }
+    close(state.fb_fd);
+
+    // Power off the system if running as init (PID 1)
+    if (getpid() == 1)
+    {
+        execl("/bin/poweroff", "poweroff", NULL);
+        while (1) pause();
+    }
+
+    return EXIT_SUCCESS;
 }

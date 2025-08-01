@@ -6,11 +6,13 @@
 
 struct system_state {
     int tty_fd;
+    int fb_fd;
     uint8_t *fbp;
     struct fb_var_screeninfo vinfo;
     struct fb_fix_screeninfo finfo;
 };
 
 struct system_state init_system(void);
+int read_key(void);
 
 #endif // INIT_H
