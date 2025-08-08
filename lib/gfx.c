@@ -112,3 +112,11 @@ void PutCircleFilled(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fi
         }
     }
 }
+
+void FlushTheFramebuffer(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo)
+{
+    // This function is optional and may not be needed for all framebuffer drivers.
+    // It can be used to ensure that the framebuffer is updated on the display.
+    // Many drivers automatically update the display from the mmap'd buffer.
+    msync(fbp, (size_t)vinfo->yres_virtual * finfo->line_length, MS_SYNC);
+}

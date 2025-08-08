@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <linux/fb.h>
+#include <sys/mman.h>
 
 // Draws a pixel at (x, y) with the specified RGB color
 void PutPixel(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo, int x, int y, uint8_t r, uint8_t g, uint8_t b);
@@ -21,5 +22,8 @@ void PutCircle(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_scre
 
 // Draws a filled circle at (xc, yc) with the specified radius and RGB color
 void PutCircleFilled(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo, int xc, int yc, int radius, uint8_t r, uint8_t g, uint8_t b);
+
+// Optional framebuffer flush helper
+void FlushTheFramebuffer(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo);
 
 #endif // GFX_H
