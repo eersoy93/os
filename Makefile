@@ -7,7 +7,7 @@ FILES_INIT_SOURCE = init/init.c init/main.c init/gfx.c
 FILES_INIT_OBJECTS = $(FILES_INIT_SOURCE:.c=.o)
 TARGET_INIT = ${ROOTFS_BIN_DIR}/init
 
-FILES_POWEROFF_SOURCE = init/poweroff.c
+FILES_POWEROFF_SOURCE = apps/poweroff/poweroff.c
 FILES_POWEROFF_OBJECTS = $(FILES_POWEROFF_SOURCE:.c=.o)
 TARGET_POWEROFF = ${ROOTFS_BIN_DIR}/poweroff
 
