@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
-#include <termios.h>
+// #include <termios.h> // not needed here anymore
 
 #include "init.h"
 
@@ -78,27 +78,4 @@ struct system_state InitTheOS(void)
     return state;
 }
 
-int ReadKey(void)
-{
-    struct termios oldt, newt;
-    int ch;
-
-    // Set terminal to non-canonical mode to read single characters
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-
-    // Set stdin to non-blocking mode to avoid blocking on getchar
-    fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
-    ch = getchar();
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    fcntl(STDIN_FILENO, F_SETFL, 0);
-
-    // If no character was read, return -1
-    if (ch == EOF)
-    {
-        return -1;
-    }
-    return ch;
-}
+// ReadKey moved to lib/input.c

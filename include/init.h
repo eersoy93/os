@@ -13,6 +13,5 @@ struct system_state {
 };
 
 struct system_state InitTheOS(void);
-int ReadKey(void);
 
 #endif // INIT_H
