@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
+
 #include "init.h"
 #include "gfx.h"
 #include "input.h"

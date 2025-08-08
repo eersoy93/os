@@ -1,4 +1,5 @@
 #include <stdlib.h>
+
 #include "gfx.h"
 
 void PutPixel(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo, int x, int y, uint8_t r, uint8_t g, uint8_t b)

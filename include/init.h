@@ -4,6 +4,7 @@
 #include <linux/fb.h>
 #include <stdint.h>
 #include <termios.h>
+
 #include "gfx.h"
 
 // System state structure to hold framebuffer and terminal information
