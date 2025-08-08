@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <sys/ioctl.h>
 #include "init.h"
 #include "gfx.h"
 #include "input.h"
@@ -69,6 +70,13 @@ int main(void)
                 (w * 75) / 100, (h * 75) / 100,
                 r_big,
                 0xFF, 0x00, 0xFF);
+
+      // Optional: flush framebuffer mapping (usually not required)
+      // Many fbdev drivers update the display directly from the mmap'd buffer.
+      // A best-effort msync won't hurt; ignore failure as it's non-fatal on devices.
+        msync(state.fbp,
+            (size_t)state.vinfo.yres_virtual * state.finfo.line_length,
+            MS_SYNC);
 
         // Sleep for a while to avoid busy waiting
         sleep(1);
