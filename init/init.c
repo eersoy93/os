@@ -5,7 +5,6 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
-// #include <termios.h> // not needed here anymore
 
 #include "init.h"
 
