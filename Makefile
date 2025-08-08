@@ -3,7 +3,10 @@ ROOTFS_BIN_DIR = ${ROOTFS_DIR}/bin
 ROOTFS_DEV_DIR = ${ROOTFS_DIR}/dev
 ROOTFS_IMAGE = rootfs.cpio
 
-FILES_INIT_SOURCE = init/init.c init/main.c init/gfx.c
+FILES_LIB_SOURCE = $(wildcard lib/gfx/*.c)
+FILES_LIB_OBJECTS = $(FILES_LIB_SOURCE:.c=.o)
+
+FILES_INIT_SOURCE = init/init.c init/main.c
 FILES_INIT_OBJECTS = $(FILES_INIT_SOURCE:.c=.o)
 TARGET_INIT = ${ROOTFS_BIN_DIR}/init
 
@@ -11,7 +14,7 @@ FILES_POWEROFF_SOURCE = apps/poweroff/poweroff.c
 FILES_POWEROFF_OBJECTS = $(FILES_POWEROFF_SOURCE:.c=.o)
 TARGET_POWEROFF = ${ROOTFS_BIN_DIR}/poweroff
 
-FILES_OBJECTS = ${FILES_INIT_OBJECTS} ${FILES_POWEROFF_OBJECTS}
+FILES_OBJECTS = ${FILES_LIB_OBJECTS} ${FILES_INIT_OBJECTS} ${FILES_POWEROFF_OBJECTS}
 SYSTEM_KERNEL = /boot/vmlinuz-$(shell uname -r)
 
 CC = gcc
@@ -26,7 +29,7 @@ src/%.o: src/%.c
 build: ${FILES_OBJECTS}
 	# Create the root filesystem directory structure
 	mkdir -p ${ROOTFS_BIN_DIR} ${ROOTFS_DEV_DIR}
-	${CC} ${CFLAGS} -o ${TARGET_INIT} ${FILES_INIT_OBJECTS} ${LDFLAGS}
+	${CC} ${CFLAGS} -o ${TARGET_INIT} ${FILES_LIB_OBJECTS} ${FILES_INIT_OBJECTS} ${LDFLAGS}
 	${CC} ${CFLAGS} -o ${TARGET_POWEROFF} ${FILES_POWEROFF_OBJECTS} ${LDFLAGS}
 	# Ensure the init binary is executable
 	chmod +x ${TARGET_INIT}
