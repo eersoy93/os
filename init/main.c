@@ -9,7 +9,7 @@
 
 int main(void)
 {
-    struct system_state state = init_system();
+    struct system_state state = InitTheOS();
 
     // Compute screen dimensions and a few helper sizes (relative layout)
     int w = state.vinfo.xres;
@@ -29,7 +29,7 @@ int main(void)
     // Main loop
     while (1)
     {
-        int key = read_key();
+        int key = ReadKey();
         // Exit on 'ESC' key
         if (key == 27) // ASCII code for ESC
         {
@@ -37,34 +37,34 @@ int main(void)
         }
 
         // Draw a pixel near top-left corner (green)
-        putpixel(state.fbp, &state.vinfo, &state.finfo, m, m, 0x00, 0xFF, 0x00);
+        PutPixel(state.fbp, &state.vinfo, &state.finfo, m, m, 0x00, 0xFF, 0x00);
 
         // Draw a line from near top-left towards screen center (white)
-        putline(state.fbp, &state.vinfo, &state.finfo,
+        PutLine(state.fbp, &state.vinfo, &state.finfo,
             2 * m, 2 * m,
             (w / 2) - m, (h / 2) - m,
             0xFF, 0xFF, 0xFF);
 
         // Draw a rectangle outline in the top-right area (red)
-        putbox(state.fbp, &state.vinfo, &state.finfo,
+        PutBox(state.fbp, &state.vinfo, &state.finfo,
             (w * 60) / 100, (h * 10) / 100,
             (w * 90) / 100, (h * 25) / 100,
             0xFF, 0x00, 0x00);
 
         // Draw a filled rectangle in the left-middle area (blue)
-        putboxfilled(state.fbp, &state.vinfo, &state.finfo,
+        PutBoxFilled(state.fbp, &state.vinfo, &state.finfo,
                 (w * 10) / 100, (h * 60) / 100,
                 (w * 30) / 100, (h * 80) / 100,
                 0x00, 0x00, 0xFF);
 
         // Draw a circle outline in the upper-left quadrant (yellow)
-        putcircle(state.fbp, &state.vinfo, &state.finfo,
+        PutCircle(state.fbp, &state.vinfo, &state.finfo,
             (w * 30) / 100, (h * 30) / 100,
             r_small,
             0xFF, 0xFF, 0x00);
 
         // Draw a filled circle in the bottom-right quadrant (magenta)
-        putcirclefilled(state.fbp, &state.vinfo, &state.finfo,
+        PutCircleFilled(state.fbp, &state.vinfo, &state.finfo,
                 (w * 75) / 100, (h * 75) / 100,
                 r_big,
                 0xFF, 0x00, 0xFF);

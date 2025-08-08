@@ -12,7 +12,7 @@ struct system_state {
     struct fb_fix_screeninfo finfo;
 };
 
-struct system_state init_system(void);
-int read_key(void);
+struct system_state InitTheOS(void);
+int ReadKey(void);
 
 #endif // INIT_H

@@ -16,7 +16,7 @@ static void handle_sigint(int sig)
     exit(EXIT_SUCCESS);
 }
 
-struct system_state init_system(void)
+struct system_state InitTheOS(void)
 {
     struct system_state state = {0};
 
@@ -78,7 +78,7 @@ struct system_state init_system(void)
     return state;
 }
 
-int read_key(void)
+int ReadKey(void)
 {
     struct termios oldt, newt;
     int ch;
