@@ -77,5 +77,3 @@ struct system_state InitTheOS(void)
 
     return state;
 }
-
-// ReadKey moved to lib/input.c
