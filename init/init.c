@@ -18,6 +18,18 @@ void HandleSIGINT(int sig)
     exit(EXIT_SUCCESS);
 }
 
+LAYOUT ComputeLayout(const SYSTEM_STATE *state)
+{
+    LAYOUT L;
+    L.w = state->vinfo.xres;
+    L.h = state->vinfo.yres;
+    L.min_dim = (L.w < L.h) ? L.w : L.h;
+    L.m = (L.min_dim > 0) ? (L.min_dim / 20) : 10;
+    L.r_small = (L.min_dim > 0) ? (L.min_dim / 12) : 15;
+    L.r_big = (L.min_dim > 0) ? (L.min_dim / 10) : 20;
+    return L;
+}
+
 SYSTEM_STATE InitTheOS(void)
 {
     SYSTEM_STATE state = {0};
@@ -78,27 +90,6 @@ SYSTEM_STATE InitTheOS(void)
     state.fb_fd = fb_fd;
 
     return state;
-}
-
-void PowerOffTheInit(void)
-{
-    if (getpid() == 1)
-    {
-        execl("/bin/poweroff", "poweroff", NULL);
-        while (1) pause();
-    }
-}
-
-LAYOUT ComputeLayout(const SYSTEM_STATE *state)
-{
-    LAYOUT L;
-    L.w = state->vinfo.xres;
-    L.h = state->vinfo.yres;
-    L.min_dim = (L.w < L.h) ? L.w : L.h;
-    L.m = (L.min_dim > 0) ? (L.min_dim / 20) : 10;
-    L.r_small = (L.min_dim > 0) ? (L.min_dim / 12) : 15;
-    L.r_big = (L.min_dim > 0) ? (L.min_dim / 10) : 20;
-    return L;
 }
 
 void DisableTerminalEcho(struct termios *out_old)
@@ -174,5 +165,14 @@ void CleanupTheSytem(SYSTEM_STATE *state)
     {
         close(state->fb_fd);
         state->fb_fd = -1;
+    }
+}
+
+void PowerOffTheInit(void)
+{
+    if (getpid() == 1)
+    {
+        execl("/bin/poweroff", "poweroff", NULL);
+        while (1) pause();
     }
 }

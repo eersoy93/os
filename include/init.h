@@ -22,9 +22,9 @@ SYSTEM_STATE InitTheOS(void);
 
 // Helper functions used by main
 void HandleSIGINT(int sig);
+LAYOUT ComputeLayout(const SYSTEM_STATE *state);
 void DisableTerminalEcho(struct termios *out_old);
 void RestoreTerminalEcho(const struct termios *oldp);
-LAYOUT ComputeLayout(const SYSTEM_STATE *state);
 void DrawInitialScreen(SYSTEM_STATE *state, const LAYOUT *L);
 void CleanupTheSytem(SYSTEM_STATE *state);
 void PowerOffTheInit(void);
