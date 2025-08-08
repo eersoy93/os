@@ -11,7 +11,7 @@
 #include "gfx.h"
 #include "input.h"
 
-static void handle_sigint(int sig)
+void HandleSIGINT(int sig)
 {
     (void)sig;
     puts("\nReceived SIGINT, exiting gracefully...");
@@ -32,7 +32,7 @@ SYSTEM_STATE InitTheOS(void)
     }
 
     // Set up signal handler for SIGINT
-    signal(SIGINT, handle_sigint);
+    signal(SIGINT, HandleSIGINT);
 
     // Open framebuffer device
     int fb_fd = open("/dev/fb0", O_RDWR);

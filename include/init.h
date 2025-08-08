@@ -16,12 +16,14 @@ typedef struct SYSTEM_STATE_TYPE
     struct fb_fix_screeninfo finfo; // Fixed screen info
 } SYSTEM_STATE;
 
+// Function prototypes for system initialization and cleanup
 SYSTEM_STATE InitTheOS(void);
 
 // Helper functions used by main
-LAYOUT ComputeLayout(const SYSTEM_STATE *state);
+void HandleSIGINT(int sig);
 void DisableTerminalEcho(struct termios *out_old);
 void RestoreTerminalEcho(const struct termios *oldp);
+LAYOUT ComputeLayout(const SYSTEM_STATE *state);
 void DrawInitialScreen(SYSTEM_STATE *state, const LAYOUT *L);
 void CleanupTheSytem(SYSTEM_STATE *state);
 void PowerOffTheInit(void);
