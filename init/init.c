@@ -143,6 +143,14 @@ void DrawInitialScreen(SYSTEM_STATE *state, const LAYOUT *L)
                     L->r_big,
                     0xFF, 0x00, 0xFF);
 
+    // Draw some text in the center of the screen (white)
+    PutText(state->fbp, &state->vinfo, &state->finfo,
+            (L->w / 2) - (L->min_dim / 4),
+            (L->h / 2) - (L->min_dim / 8),
+            "Welcome to the OS!",
+            SYSTEM_FONT,
+            0x00, 0xFF, 0x00);
+
     // Flush the framebuffer to apply changes
     FlushTheFramebuffer(state->fbp, &state->vinfo, &state->finfo);
 }

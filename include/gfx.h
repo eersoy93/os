@@ -16,6 +16,9 @@ typedef struct LAYOUT_TYPE
     int r_big;      // Radius for big circles
 } LAYOUT;
 
+// System font path for text rendering
+#define SYSTEM_FONT "/usr/font.ttf"
+
 // Draws a pixel at (x, y) with the specified RGB color
 void PutPixel(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo, int x, int y, uint8_t r, uint8_t g, uint8_t b);
 
@@ -33,6 +36,9 @@ void PutCircle(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_scre
 
 // Draws a filled circle at (xc, yc) with the specified radius and RGB color
 void PutCircleFilled(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo, int xc, int yc, int radius, uint8_t r, uint8_t g, uint8_t b);
+
+// Draws text using specified TTF font at (x, y) with the specified RGB color
+void PutText(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo, int x, int y, const char *text, const char *font_path, uint8_t r, uint8_t g, uint8_t b);
 
 // Optional framebuffer flush helper
 void FlushTheFramebuffer(uint8_t *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo);

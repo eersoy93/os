@@ -4,12 +4,12 @@ Erdem Ersoy's New OS. Uses Pardus 23's Linux kernel. Written with GitHub Copilot
 
 **NOTE:** This project is a stub.
 
-![Erdem Ersoy's New OS Screenshot](os.png)
+![Erdem Ersoy's New OS Screenshot (Uses Ubuntu Mono Font)](os.png)
 
 ## Required Pardus 23 Packages
 
 ``` 
-build-essential qemu-system-x86
+build-essential qemu-system-x86 libfreetype-dev
 ```
 
 ## Building and Running
