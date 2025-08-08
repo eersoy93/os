@@ -3,15 +3,27 @@
 
 #include <linux/fb.h>
 #include <stdint.h>
+#include <termios.h>
+#include "gfx.h"
 
-struct system_state {
-    int tty_fd;
-    int fb_fd;
-    uint8_t *fbp;
-    struct fb_var_screeninfo vinfo;
-    struct fb_fix_screeninfo finfo;
-};
+// System state structure to hold framebuffer and terminal information
+typedef struct SYSTEM_STATE_TYPE
+{
+    int tty_fd;               // File descriptor for tty0
+    int fb_fd;                // File descriptor for framebuffer
+    uint8_t *fbp;             // Pointer to framebuffer memory
+    struct fb_var_screeninfo vinfo; // Variable screen info
+    struct fb_fix_screeninfo finfo; // Fixed screen info
+} SYSTEM_STATE;
 
-struct system_state InitTheOS(void);
+SYSTEM_STATE InitTheOS(void);
+
+// Helper functions used by main
+LAYOUT ComputeLayout(const SYSTEM_STATE *state);
+void DisableTerminalEcho(struct termios *out_old);
+void RestoreTerminalEcho(const struct termios *oldp);
+void DrawInitialScreen(SYSTEM_STATE *state, const LAYOUT *L);
+void CleanupTheSytem(SYSTEM_STATE *state);
+void PowerOffTheInit(void);
 
 #endif // INIT_H
