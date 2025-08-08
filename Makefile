@@ -3,7 +3,7 @@ ROOTFS_BIN_DIR = ${ROOTFS_DIR}/bin
 ROOTFS_DEV_DIR = ${ROOTFS_DIR}/dev
 ROOTFS_IMAGE = rootfs.cpio
 
-FILES_LIB_SOURCE = $(wildcard lib/gfx/*.c)
+FILES_LIB_SOURCE = $(wildcard lib/*.c)
 FILES_LIB_OBJECTS = $(FILES_LIB_SOURCE:.c=.o)
 
 FILES_INIT_SOURCE = init/init.c init/main.c
@@ -18,7 +18,7 @@ FILES_OBJECTS = ${FILES_LIB_OBJECTS} ${FILES_INIT_OBJECTS} ${FILES_POWEROFF_OBJE
 SYSTEM_KERNEL = /boot/vmlinuz-$(shell uname -r)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c17 -D_GNU_SOURCE
+CFLAGS = -Wall -Wextra -Werror -std=c17 -D_GNU_SOURCE -I./include
 LDFLAGS = -static
 
 

@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include "init.h"
-#include "../lib/gfx/gfx.h"
+#include "gfx.h"
 #include <termios.h>
 
 int main(void)
